@@ -23,33 +23,33 @@ INSTALL/SETUP
 
 **Step 1**: Add the following code to your .vimrc:
 
-   command! -range=% ClipHtml :call ConvertToClipHtml(<line1>, <line2>)
-   function! ConvertToClipHtml(line1, line2)
-      " Remember current colorscheme, then switch to the one with the
-      " light background
-      let l:prev_color = g:colors_name
-      colorscheme emacs " viable options are: automation, bw, c, emacs, tolerable
-      " Convert to HTML and copy to clipboard
-      let g:html_font = "Courier New"
-      let g:html_start_line = min([a:line1, a:line2])
-      let g:html_end_line = max([a:line1, a:line2])
-      runtime syntax/2html.vim
-      normal gg"+yG
-      " Close the buffer and clean up
-      bdelete!
-      unlet g:html_start_line
-      unlet g:html_end_line
-      unlet g:html_font
-      " restore the original colorscheme
-      exec "colorscheme " . l:prev_color
-   endfunc
+    command! -range=% ClipHtml :call ConvertToClipHtml(<line1>, <line2>)
+    function! ConvertToClipHtml(line1, line2)
+        " Remember current colorscheme, then switch to the one with the
+        " light background
+        let l:prev_color = g:colors_name
+        colorscheme emacs " viable options are: automation, bw, c, emacs, tolerable
+        " Convert to HTML and copy to clipboard
+        let g:html_font = "Courier New"
+        let g:html_start_line = min([a:line1, a:line2])
+        let g:html_end_line = max([a:line1, a:line2])
+        runtime syntax/2html.vim
+        normal gg"+yG
+        " Close the buffer and clean up
+        bdelete!
+        unlet g:html_start_line
+        unlet g:html_end_line
+        unlet g:html_font
+        " restore the original colorscheme
+        exec "colorscheme " . l:prev_color
+    endfunc
 
 This function automates the 2html.vim call: generates HTML for the selected text in a new temporary
 buffer, copies contents to the system clipboard as text, and closes the temporary buffer. Before generating HTML the color scheme is switched to light-backroung one, and after the task is complete,
-restores the original color scheme. You can also add a shortcut key to call the above function on the
+original color scheme is restored. You can also add a shortcut key to call the above function on the
 current selection. My personal choice is Shift-C (in visual mode only):
 
-   vnoremap C :ClipHtml<CR>
+    vnoremap C :ClipHtml<CR>
 
 **Step 2**: Copy clip2html.exe executable to your hard drive and create a shortcut for it either on
 Windows Desktop or in Windows start menu (in any other location hotkeys won't work).
@@ -73,9 +73,10 @@ With the above setup, the copy-paste process looks like this:
 ACKNOWLEDGEMENTS
 ================
 
-The solution is based on the code from thse sources:
-http://code.activestate.com/recipes/474121
-https://github.com/sgraham/sgraham/blob/master/vimfiles/plugin/cliphtml.vim
+The solution is based on the code from the following sources:
+
+* http://code.activestate.com/recipes/474121
+* https://github.com/sgraham/sgraham/blob/master/vimfiles/plugin/cliphtml.vim
 
 thanks guys!
 
